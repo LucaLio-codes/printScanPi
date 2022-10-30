@@ -17,5 +17,6 @@ module.exports = {
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
     "vue/multi-word-component-names":
       process.env.NODE_ENV === "production" ? "warn" : "off",
+    "prefer-const": process.env.NODE_ENV === "production" ? "warn" : "off",
   },
 };
