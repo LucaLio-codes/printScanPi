@@ -1,17 +1,38 @@
 <template>
-  <div class="container">
-    <v-btn @click="debug"> test </v-btn>
-  </div>
+  <v-container class="container">
+    <v-col>
+      <SubmitScanComponent @index="handleIndex" />
+    </v-col>
+    <v-col>
+      <ScanPreviewComponent v-if="index" :index="index" />
+    </v-col>
+  </v-container>
 </template>
 <script lang="ts">
 import Vue from "vue";
-import scan from "@/api/print";
+import SubmitScanComponent from "@/components/scan/SubmitScanComponent.vue";
+import ScanPreviewComponent from "@/components/scan/ScanPreviewComponent.vue";
 export default Vue.extend({
   name: "ScannerView",
+  components: {
+    SubmitScanComponent,
+    ScanPreviewComponent,
+  },
+  data() {
+    return {
+      index: NaN,
+    };
+  },
   methods: {
-    async debug() {
-      await scan(undefined, undefined).then();
+    handleIndex(event: any) {
+      this.index = event;
     },
   },
 });
 </script>
+<style scoped>
+.container {
+  display: flex;
+  align-items: center;
+}
+</style>
