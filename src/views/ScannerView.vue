@@ -3,9 +3,10 @@
     <v-row>
       <v-col>
         <SubmitScanComponent @index="handleIndex" />
+        <PrintComponent v-if="false" />
       </v-col>
       <v-col>
-        <ScanPreviewComponent v-if="index" :index="index" />
+        <PreviewComponent v-if="index" :index="index" />
       </v-col>
     </v-row>
   </v-container>
@@ -13,12 +14,15 @@
 <script lang="ts">
 import Vue from "vue";
 import SubmitScanComponent from "@/components/scan/SubmitScanComponent.vue";
-import ScanPreviewComponent from "@/components/scan/ScanPreviewComponent.vue";
+import PreviewComponent from "@/components/fs/PreviewComponent.vue";
+import PrintComponent from "@/components/print/PrintComponent.vue";
+
 export default Vue.extend({
   name: "ScannerView",
   components: {
     SubmitScanComponent,
-    ScanPreviewComponent,
+    PreviewComponent,
+    PrintComponent,
   },
   data() {
     return {
@@ -26,7 +30,7 @@ export default Vue.extend({
     };
   },
   methods: {
-    handleIndex(event: any) {
+    handleIndex(event: number) {
       this.index = event;
     },
   },
@@ -35,6 +39,5 @@ export default Vue.extend({
 <style scoped>
 .container {
   display: flex;
-  align-items: center;
 }
 </style>

@@ -1,22 +1,21 @@
 <template>
-  <div>
-    <v-row>
+  <div class="mb-5">
+    <v-row class="ml-1"> <h1>SCAN</h1> </v-row>
+    <v-row class="ml-1">
       <v-col>
         <v-text-field label="Filename" />
       </v-col>
       <v-col>
         <v-select style="width: 40%" label="Filetype" :items="items" />
-      </v-col>
-      <v-col>
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
             <v-icon color="primary" dark v-bind="attrs" v-on="on"> ? </v-icon>
           </template>
-          <span>Tooltip</span>
+          <span>Name und Filetype optional</span>
         </v-tooltip>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row class="ml-1">
       <v-btn :loading="scanning" @click="scan"> Scan </v-btn>
       <v-btn :loading="scanning" @click="debug"> Debug </v-btn>
     </v-row>

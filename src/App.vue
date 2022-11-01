@@ -14,12 +14,12 @@
       </div>
       <v-spacer></v-spacer>
       <v-tabs right>
-        <v-tab @click="handleScan">Scan/Print</v-tab>
-        <v-tab @click="handleFS">File System</v-tab>
+        <v-tab to="/">Scan/Print</v-tab>
+        <v-tab to="/fs">File System</v-tab>
       </v-tabs>
     </v-app-bar>
 
-    <v-main class="align-center">
+    <v-main>
       <router-view />
     </v-main>
   </v-app>
@@ -31,17 +31,8 @@ import Vue from "vue";
 export default Vue.extend({
   name: "App",
 
-  data: () => ({
-    //
-  }),
-  methods: {
-    handleScan() {
-      this.$router.push("/");
-    },
-    handleFS() {
-      this.$router.push("/fs");
-    },
-  },
+  data: () => ({}),
+  methods: {},
 });
 </script>
 <style scoped>

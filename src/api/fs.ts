@@ -5,3 +5,11 @@ const BASE_URL = "http://raspberrypi:8000/fs";
 export const getScannedItemByIndex = async (index: number) => {
   return await axios.get(`${BASE_URL}/scans/${index}`);
 };
+
+export const getAllScannedItems = async () => {
+  return await axios.get(`${BASE_URL}/scans`);
+};
+
+export const getPrintables = async () => {
+  return await axios.get(`${BASE_URL}/print/`);
+};
