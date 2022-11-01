@@ -1,11 +1,13 @@
 <template>
   <v-container class="container">
-    <v-col>
-      <SubmitScanComponent @index="handleIndex" />
-    </v-col>
-    <v-col>
-      <ScanPreviewComponent v-if="index" :index="index" />
-    </v-col>
+    <v-row>
+      <v-col>
+        <SubmitScanComponent @index="handleIndex" />
+      </v-col>
+      <v-col>
+        <ScanPreviewComponent v-if="index" :index="index" />
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 <script lang="ts">

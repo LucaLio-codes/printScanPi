@@ -1,18 +1,26 @@
 <template>
-  <v-row>
+  <div>
     <v-row>
       <v-col>
         <v-text-field label="Filename" />
       </v-col>
       <v-col>
-        <v-select label="Filetype" :items="items" />
+        <v-select style="width: 40%" label="Filetype" :items="items" />
+      </v-col>
+      <v-col>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="primary" dark v-bind="attrs" v-on="on"> ? </v-icon>
+          </template>
+          <span>Tooltip</span>
+        </v-tooltip>
       </v-col>
     </v-row>
     <v-row>
       <v-btn :loading="scanning" @click="scan"> Scan </v-btn>
       <v-btn :loading="scanning" @click="debug"> Debug </v-btn>
     </v-row>
-  </v-row>
+  </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
