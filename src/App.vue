@@ -10,11 +10,13 @@
           transition="scale-transition"
           width="40"
         />
-
-        <H1>Fuck Printers (:</H1>
+        <div class="no-wrap">Fuck Printers (:</div>
       </div>
-
       <v-spacer></v-spacer>
+      <v-tabs right>
+        <v-tab @click="handleScan">Scan/Print</v-tab>
+        <v-tab @click="handleFS">File System</v-tab>
+      </v-tabs>
     </v-app-bar>
 
     <v-main class="align-center">
@@ -32,5 +34,20 @@ export default Vue.extend({
   data: () => ({
     //
   }),
+  methods: {
+    handleScan() {
+      this.$router.push("/");
+    },
+    handleFS() {
+      this.$router.push("/fs");
+    },
+  },
 });
 </script>
+<style scoped>
+.no-wrap {
+  white-space: nowrap;
+  font-weight: 900;
+  font-size: 24pt;
+}
+</style>
