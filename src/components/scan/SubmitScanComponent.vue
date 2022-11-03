@@ -3,10 +3,15 @@
     <v-row class="ml-1"> <h1>SCAN</h1> </v-row>
     <v-row class="ml-1">
       <v-col>
-        <v-text-field label="Filename" />
+        <v-text-field label="Filename" @change="changeFilename($event)" />
       </v-col>
       <v-col>
-        <v-select style="width: 40%" label="Filetype" :items="items" />
+        <v-select
+          style="width: 40%"
+          label="Filetype"
+          @change="changeFiletype($event)"
+          :items="items"
+        />
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
             <v-icon color="primary" dark v-bind="attrs" v-on="on"> ? </v-icon>
@@ -30,17 +35,19 @@ export default Vue.extend({
   data() {
     return {
       scanning: false,
+      filename: "",
+      filetype: "",
     };
   },
   computed: {
     items() {
-      return Object.keys(FileType);
+      return Object.values(FileType);
     },
   },
   methods: {
     async scan() {
       this.scanning = true;
-      await scan("", "").then(
+      await scan(this.filename, this.filetype).then(
         (res) => {
           this.scanning = false;
           this.$emit("index", res.data.scanIndex);
@@ -50,6 +57,13 @@ export default Vue.extend({
     },
     debug() {
       this.$emit("index", 5);
+    },
+    changeFilename(filename: string) {
+      debugger;
+      this.filename = filename;
+    },
+    changeFiletype(filetype: string) {
+      this.filetype = filetype;
     },
   },
 });

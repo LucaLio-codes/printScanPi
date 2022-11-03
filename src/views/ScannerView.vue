@@ -3,7 +3,7 @@
     <v-row>
       <v-col>
         <SubmitScanComponent @index="handleIndex" />
-        <PrintComponent v-if="false" />
+        <PrintComponent />
       </v-col>
       <v-col>
         <PreviewComponent v-if="index" :index="index" />

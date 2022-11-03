@@ -15,6 +15,12 @@
     <v-row class="ml-1">
       <v-btn :loading="loading" @click="handleClick"> Print </v-btn>
     </v-row>
+    <v-row>
+      <v-progress-linear
+        v-if="loading"
+        :value="(fileCount / currentPrint) * 100"
+      />
+    </v-row>
   </div>
 </template>
 <script lang="ts">
@@ -26,13 +32,24 @@ export default Vue.extend({
     return {
       files: [] as File[],
       loading: false,
+      currentPrint: 0,
     };
+  },
+  computed: {
+    fileCount() {
+      return this.$data.files.length;
+    },
   },
   methods: {
     async handleClick() {
       this.loading = true;
+      this.currentPrint = 0;
       console.log(this.files);
-      await printFiles(this.files).then((_) => (this.loading = false));
+      let prommisses = [];
+      this.files.forEach((file) => {
+        const job = printFiles(file).then(() => this.currentPrint++);
+        prommisses.push(job);
+      });
     },
   },
 });
