@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app dark>
       <div class="d-flex align-center">
         <v-img
           alt="Logo"
@@ -12,8 +12,10 @@
         />
         <div class="no-wrap">Fuck Printers (:</div>
       </div>
-      <v-spacer></v-spacer>
-      <v-tabs right>
+      <div class="button mx-5">
+        <v-switch v-model="$vuetify.theme.dark" inset color="black"></v-switch>
+      </div>
+      <v-tabs fixed-tabs>
         <v-tab to="/">Scan/Print</v-tab>
         <v-tab to="/fs">File System</v-tab>
       </v-tabs>
@@ -35,10 +37,23 @@ export default Vue.extend({
   methods: {},
 });
 </script>
-<style scoped>
+<style>
 .no-wrap {
   white-space: nowrap;
   font-weight: 900;
   font-size: 24pt;
+}
+.v-toolbar__content {
+  justify-content: space-between;
+  align-items: center;
+}
+.button {
+  align-self: center;
+}
+.button > .v-input > .v-input__control {
+  flex-direction: row;
+  align-content: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
 }
 </style>
