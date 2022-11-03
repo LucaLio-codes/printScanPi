@@ -3,7 +3,7 @@ import axios from "axios";
 const BASE_URL = "http://raspberrypi:8000/fs";
 
 export const getScannedItemByIndex = async (index: number) => {
-  return await axios.get(`${BASE_URL}/scans/${index}`);
+  return await axios.get(`${BASE_URL}/files/${index}`);
 };
 
 export const getAllScannedItems = async () => {
@@ -12,4 +12,8 @@ export const getAllScannedItems = async () => {
 
 export const getPrintables = async () => {
   return await axios.get(`${BASE_URL}/print/`);
+};
+
+export const deleteScannedItemByIndex = async (index: number) => {
+  return await axios.delete(`${BASE_URL}/files/${index}`);
 };

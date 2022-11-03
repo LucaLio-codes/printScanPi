@@ -5,6 +5,7 @@
     </v-expansion-panel-header>
     <v-expansion-panel-content>
       <v-btn @click="$emit('print')"> Print </v-btn>
+      <v-btn @click="$emit('delete')"> Delete </v-btn>
     </v-expansion-panel-content>
   </v-expansion-panel>
 </template>

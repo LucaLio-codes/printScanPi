@@ -9,6 +9,7 @@
         counter
         multiple
         show-size
+        chips
         truncate-length="16"
       ></v-file-input>
     </v-row>
@@ -18,7 +19,7 @@
     <v-row>
       <v-progress-linear
         v-if="loading"
-        :value="(fileCount / currentPrint) * 100"
+        :value="(currentPrint * 100) / fileCount"
       />
     </v-row>
   </div>
@@ -44,12 +45,15 @@ export default Vue.extend({
     async handleClick() {
       this.loading = true;
       this.currentPrint = 0;
-      console.log(this.files);
-      let prommisses = [];
+      let prommisses: any[] = [];
       this.files.forEach((file) => {
-        const job = printFiles(file).then(() => this.currentPrint++);
+        const job = printFiles(file).then((res) => {
+          this.currentPrint++;
+          console.log(res);
+        });
         prommisses.push(job);
       });
+      await Promise.all(prommisses).finally(() => (this.loading = false));
     },
   },
 });

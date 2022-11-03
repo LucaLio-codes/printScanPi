@@ -1,7 +1,12 @@
 <template>
   <v-container class="container">
     <v-col>
-      <ListFilesystemComponent @print="handlePrint" @change="index = $event" />
+      <ListFilesystemComponent
+        :reload="reload"
+        @print="handlePrint"
+        @delete="handleDelete"
+        @change="index = $event"
+      />
     </v-col>
     <v-col>
       <PreviewComponent v-if="index" :index="index" />
@@ -13,11 +18,13 @@ import Vue from "vue";
 import ListFilesystemComponent from "@/components/fs/ListFilesystemComponent.vue";
 import PreviewComponent from "@/components/fs/PreviewComponent.vue";
 import { print } from "@/api/print";
+import { deleteScannedItemByIndex } from "@/api/fs";
 export default Vue.extend({
   name: "FileSystemView",
   data() {
     return {
       index: NaN,
+      reload: false,
     };
   },
   components: {
@@ -27,6 +34,11 @@ export default Vue.extend({
   methods: {
     async handlePrint(event: number) {
       await print(event);
+    },
+    async handleDelete(event: number) {
+      await deleteScannedItemByIndex(event).then(
+        () => (this.reload = !this.reload)
+      );
     },
   },
 });

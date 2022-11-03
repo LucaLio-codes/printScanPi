@@ -9,7 +9,7 @@ export default Vue.extend({
   name: "ScanPreviewComponent",
   data() {
     return {
-      baseUrl: "http://raspberrypi:8000/fs/scans",
+      baseUrl: "http://raspberrypi:8000/fs/files",
     };
   },
   props: {

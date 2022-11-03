@@ -22,7 +22,6 @@
     </v-row>
     <v-row class="ml-1">
       <v-btn :loading="scanning" @click="scan"> Scan </v-btn>
-      <v-btn :loading="scanning" @click="debug"> Debug </v-btn>
     </v-row>
   </div>
 </template>

@@ -1,4 +1,4 @@
-import { ScanResponse } from "@/types/api";
+import { ScanResponse, FileType } from "@/types/api";
 import axios from "axios";
 
 const BASE_URL = "http://raspberrypi:8000/print";
@@ -16,6 +16,12 @@ export const print = async (index: number) => {
 };
 export const printFiles = async (file: File) => {
   let formData = new FormData();
-  formData.append("files", file);
-  return await axios.post<ScanResponse>(`${BASE_URL}/files`, formData);
+  formData.append("file", file);
+  const headers = {
+    Accept: "application/json",
+    "Content-Type": "multipart/form-data",
+  };
+  return await axios.post<ScanResponse>(`${BASE_URL}/files`, formData, {
+    headers: headers,
+  });
 };
