@@ -56,4 +56,8 @@ export default Vue.extend({
   justify-content: flex-start;
   flex-wrap: nowrap;
 }
+
+html {
+  background: black;
+}
 </style>
