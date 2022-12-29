@@ -5,11 +5,11 @@
         :reload="reload"
         @print="handlePrint"
         @delete="handleDelete"
-        @change="index = $event"
+        @change="handleChange"
       />
     </v-col>
     <v-col>
-      <PreviewComponent v-if="index" :index="index" />
+      <PreviewComponent v-if="index > -1" :index="index" />
     </v-col>
   </v-container>
 </template>
@@ -23,7 +23,7 @@ export default Vue.extend({
   name: "FileSystemView",
   data() {
     return {
-      index: NaN,
+      index: -1,
       reload: false,
     };
   },
@@ -39,6 +39,9 @@ export default Vue.extend({
       await deleteScannedItemByIndex(event).then(
         () => (this.reload = !this.reload)
       );
+    },
+    handleChange(event: number) {
+      this.index = event;
     },
   },
 });

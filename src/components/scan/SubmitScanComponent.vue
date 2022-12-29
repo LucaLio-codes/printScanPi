@@ -58,7 +58,6 @@ export default Vue.extend({
       this.$emit("index", 5);
     },
     changeFilename(filename: string) {
-      debugger;
       this.filename = filename;
     },
     changeFiletype(filetype: string) {

@@ -5,16 +5,20 @@
       :src="`${baseUrl}/${index}`"
       alt=""
     />
-    <pdf
-      v-else-if="docType == MyDocumentType.PDF"
-      :src="`${baseUrl}/${index}`"
+    <iframe
+      height="3508"
+      width="2480"
+      v-else
+      :src="`${baseUrl}/${index}/${new Date().getMilliseconds()}`"
     />
   </v-row>
 </template>
 <script lang="ts">
 import Vue from "vue";
-import pdf from "vue-pdf";
 import { getScannedItemByIndex } from "@/api/fs";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import pdf from "pdfvuer";
 enum MyDocumentType {
   NONE = "",
   PNG = "image/png",
@@ -31,17 +35,14 @@ export default Vue.extend({
     };
   },
   components: {
-    pdf,
+    // pdf,
+  },
+  async created() {
+    await this.fetchData();
   },
   watch: {
     async index() {
-      await getScannedItemByIndex(this.index).then(
-        (res) =>
-          (this.docType = this.headerFieldToDocumentType(
-            res.headers["content-type"]
-          )),
-        console.log
-      );
+      await this.fetchData();
     },
   },
   props: {
@@ -62,6 +63,14 @@ export default Vue.extend({
           return MyDocumentType.TXT;
       }
       return MyDocumentType.NONE;
+    },
+    async fetchData() {
+      await getScannedItemByIndex(this.index).then((res) => {
+        this.docType = this.headerFieldToDocumentType(
+          res.headers["content-type"]
+        );
+        console.log(res.data);
+      }, console.log);
     },
   },
 });
